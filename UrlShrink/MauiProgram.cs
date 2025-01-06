@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 
+using UrlShrink.Services;
+using UrlShrink.ViewModels;
+
 namespace UrlShrink;
 
 public static class MauiProgram
@@ -14,6 +17,11 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+
+        builder.Services.AddTransient<IURLService, URLService>();
+        builder.Services.AddTransient<MainPageViewModel>();
+        builder.Services.AddTransient<MainPage>(sp => new MainPage(sp.GetRequiredService<MainPageViewModel>()));
+
 
 #if DEBUG
         builder.Logging.AddDebug();
