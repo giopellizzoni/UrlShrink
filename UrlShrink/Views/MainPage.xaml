@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UrlShrink.MainPage">
+
+    <ScrollView>
+        <ScrollView.Background>
+            <LinearGradientBrush>
+                <GradientStop
+                    Offset="0.0"
+                    Color="#572375" />
+                <GradientStop
+                    Offset="1"
+                    Color="#A594F9" />
+            </LinearGradientBrush>
+        </ScrollView.Background>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <Frame Grid.Row="0" Margin="10, 5" Padding="5, 2">
+                <Entry Placeholder="Enter an URL to shrink"
+                       PlaceholderColor="Gray" />
+            </Frame>
+            <Button Grid.Row="1"
+                Margin="10,5"
+                BackgroundColor="#10002B"
+                Text="Shrink it!" />
+
+            <Border Grid.Row="2" >
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10,10,0,0" />
+                </Border.StrokeShape>
+
+                <Frame
+                    VerticalOptions="Fill"
+                    CornerRadius="0">
+                    <VerticalStackLayout>
+                        <Label FontSize="Title" Text="Previous URLs"/>
+                        <CollectionView>
+
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>
