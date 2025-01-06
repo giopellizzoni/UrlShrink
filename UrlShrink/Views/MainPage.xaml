@@ -18,22 +18,22 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
 
             <Frame Grid.Row="0" Margin="10, 5" Padding="5, 2">
                 <Entry Placeholder="Enter an URL to shrink"
-                       PlaceholderColor="Gray" />
+                       PlaceholderColor="Gray" Text="{Binding Url}" />
             </Frame>
             <Button Grid.Row="1"
-                Margin="10,5"
-                BackgroundColor="#10002B"
-                Text="Shrink it!" />
+                    Margin="10,5"
+                    BackgroundColor="#10002B"
+                    Text="Shrink it!" Command="{Binding ShortenUrlCommand}" />
 
-            <Border Grid.Row="2" >
+            <Border Grid.Row="2">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,0,0" />
                 </Border.StrokeShape>
@@ -42,9 +42,13 @@
                     VerticalOptions="Fill"
                     CornerRadius="0">
                     <VerticalStackLayout>
-                        <Label FontSize="Title" Text="Previous URLs"/>
-                        <CollectionView>
-
+                        <Label FontSize="Title" Text="Previous URLs" />
+                        <CollectionView ItemsSource="{Binding Urls}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding ShortenedURL}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
                         </CollectionView>
                     </VerticalStackLayout>
                 </Frame>

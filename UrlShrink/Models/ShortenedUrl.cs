@@ -1,7 +1,6 @@
 ﻿namespace UrlShrink.Models;
 
-public class Url
+public class ShortenedUrl
 {
-    public string Address { get; set; }
     public string ShortenedURL { get; set; }
 }
