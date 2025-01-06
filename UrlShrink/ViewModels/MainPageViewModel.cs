@@ -33,6 +33,8 @@ public sealed class MainPageViewModel
             Application.Current?.MainPage?.DisplayAlert("Error", "Failed to shorten the URL", "OK");
             return;
         }
+
+        // We can write the shortened URL to a cache or database
         Urls.Add(new ShortenedUrl { ShortenedURL = shortenedUrl.tiny_url});
     });
 }
