@@ -16,7 +16,6 @@
                     Color="#A594F9" />
             </LinearGradientBrush>
         </ScrollView.Background>
-
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -33,7 +32,6 @@
                     Margin="10,5"
                     BackgroundColor="#10002B"
                     Text="Shrink it!" Command="{Binding ShortenUrlCommand}" />
-
             <Border Grid.Row="2">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10,10,0,0" />
@@ -44,6 +42,7 @@
                     CornerRadius="0">
                     <VerticalStackLayout>
                         <Label FontSize="Title" Text="Previous URLs" />
+                        <ActivityIndicator IsRunning="{Binding IsRunning}" />
                         <CollectionView ItemsSource="{Binding Urls}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>

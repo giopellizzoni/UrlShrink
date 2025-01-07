@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 
 using UrlShrink.Services;
+using UrlShrink.Services.Interfaces;
 using UrlShrink.ViewModels;
 
 namespace UrlShrink;

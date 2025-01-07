@@ -1,18 +1,31 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 using UrlShrink.Models;
 using UrlShrink.Services;
+using UrlShrink.Services.Interfaces;
 
 namespace UrlShrink.ViewModels;
 
-public sealed class MainPageViewModel
+public sealed class MainPageViewModel : ObservableViewModel
 {
     private readonly IURLService _urlService;
+    private string _url;
+    private bool _isRunning;
 
     public ObservableCollection<ShortenedUrl> Urls { get; set; } = [];
-
-    public string Url { get; set; }
+    public string Url
+    {
+        get => _url;
+        set => SetField(ref _url, value);
+    }
+    public bool IsRunning
+    {
+        get => _isRunning;
+        set => SetField(ref _isRunning, value);
+    }
 
     public MainPageViewModel(IURLService urlService)
     {
@@ -21,6 +34,7 @@ public sealed class MainPageViewModel
 
     public ICommand ShortenUrlCommand => new Command(async () =>
     {
+        IsRunning = true;
         if (string.IsNullOrEmpty(Url))
         {
             // Better Create an DialogService to handle this
@@ -29,15 +43,20 @@ public sealed class MainPageViewModel
         }
 
         var shortenedUrl = await _urlService.CreateAShortenedURL(Url);
+        IsRunning = false;
+
         if (shortenedUrl == null)
         {
             Application.Current?.MainPage?.DisplayAlert("Error", "Failed to shorten the URL", "OK");
-            return;
+        }
+        else
+        {
+            // We can write the shortened URL to a cache or database
+            Urls.Add(new ShortenedUrl { ShortenedURL = shortenedUrl.ShortenedUrl });
         }
 
-        // We can write the shortened URL to a cache or database
-        Urls.Add(new ShortenedUrl { ShortenedURL = shortenedUrl.tiny_url });
         Url = string.Empty;
+
     });
 
     public ICommand DeleteCommand => new Command((url) =>

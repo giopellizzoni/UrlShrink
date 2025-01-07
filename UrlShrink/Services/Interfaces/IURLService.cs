@@ -1,4 +1,6 @@
-﻿namespace UrlShrink.Services;
+﻿using UrlShrink.Models;
+
+namespace UrlShrink.Services.Interfaces;
 
 public interface IURLService
 {
