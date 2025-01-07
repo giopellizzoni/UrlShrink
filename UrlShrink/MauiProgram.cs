@@ -20,6 +20,7 @@ public static class MauiProgram
             });
 
         builder.Services.AddTransient<IURLService, URLService>();
+        builder.Services.AddTransient<IAlertService, AlertService>();
         builder.Services.AddTransient<MainPageViewModel>();
         builder.Services.AddTransient<MainPage>(sp => new MainPage(sp.GetRequiredService<MainPageViewModel>()));
 

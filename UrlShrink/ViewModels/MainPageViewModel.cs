@@ -27,7 +27,7 @@ public sealed class MainPageViewModel : ObservableViewModel
         set => SetField(ref _isRunning, value);
     }
 
-    public MainPageViewModel(IURLService urlService)
+    public MainPageViewModel(IURLService urlService, IAlertService alertService) : base(alertService)
     {
         _urlService = urlService;
     }
@@ -37,8 +37,8 @@ public sealed class MainPageViewModel : ObservableViewModel
         IsRunning = true;
         if (string.IsNullOrEmpty(Url))
         {
-            // Better Create an DialogService to handle this
-            Application.Current?.MainPage?.DisplayAlert("Error", "Please enter a URL", "OK");
+            await _alertService.ShowAlertMessageAsync("Error", "Please enter a URL", "OK");
+            IsRunning = false;
             return;
         }
 
@@ -47,7 +47,7 @@ public sealed class MainPageViewModel : ObservableViewModel
 
         if (shortenedUrl == null)
         {
-            Application.Current?.MainPage?.DisplayAlert("Error", "Failed to shorten the URL", "OK");
+            await _alertService.ShowAlertMessageAsync("Error", "Failed to shorten the URL", "OK");
         }
         else
         {

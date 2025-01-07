@@ -1,10 +1,19 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+using UrlShrink.Services.Interfaces;
+
 namespace UrlShrink.ViewModels;
 
 public abstract class ObservableViewModel : INotifyPropertyChanged
 {
+    protected readonly IAlertService _alertService;
+
+    protected ObservableViewModel(IAlertService alertService)
+    {
+        _alertService = alertService;
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
